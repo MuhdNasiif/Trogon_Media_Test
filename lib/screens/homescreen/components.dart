@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:trogon_media_test2/screens/feed/feedscreen.dart';
 import 'package:trogon_media_test2/screens/homescreen/homescreen.dart';
 import 'package:trogon_media_test2/screens/mycourse/course.dart';
 
@@ -12,6 +13,8 @@ class BottomNavigationBarTrogon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
+      showSelectedLabels: true,
+      showUnselectedLabels: true,
       selectedFontSize: 10,
       selectedItemColor: Colors.blue,
       unselectedItemColor: Colors.grey,
@@ -55,8 +58,15 @@ class BottomNavigationBarTrogon extends StatelessWidget {
               MaterialPageRoute(builder: (context) => const MyCoursePage()),
             );
             break;
+            case 2:
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) =>  FeedScreen()),
+            );
+            break;
         }
       },
     );
   }
 }
+//-------------------------------------------------------------------------------------------

@@ -1,3 +1,4 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -27,10 +28,10 @@ class HomeScreen extends StatelessWidget {
         child: BlocProvider(
           create: (context) => HomescreenCubit(context),
           child: BlocBuilder<HomescreenCubit, HomescreenState>(
-            builder: (context, state) {
-              if (state is ViewAllData){
+              builder: (context, state) {
+            if (state is ViewAllData) {
               return Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(14.0),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -41,10 +42,24 @@ class HomeScreen extends StatelessWidget {
                       decoration: BoxDecoration(
                           color: Colors.red,
                           borderRadius: BorderRadius.circular(11)),
-                      child: Image.asset(
-                        "assets/hisham 3.png",
-                        fit: BoxFit.fill,
+                      child: PageView.builder(
+                        allowImplicitScrolling: true,
+                        itemCount: state.model.data!.adBanner!.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          return
+                          
+                          
+                          
+                           Image.network(
+                            state.model.data!.adBanner![index].image.toString(),
+                            fit: BoxFit.cover,
+                          );
+                        },
                       ),
+                      //  Image.asset(
+                      //   "assets/hisham 3.png",
+                      //   fit: BoxFit.fill,
+                      // ),
                     ),
                     const SizedBox(
                       height: 15,
@@ -64,21 +79,43 @@ class HomeScreen extends StatelessWidget {
                         ),
                         itemCount: state.model.data!.topCourses!.length,
                         itemBuilder: (BuildContext context, int index) {
-                          return Container(
-                            height: 180,
-                            width: 164,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(11)),
-                            child: Column(
-                              children: [
-                                Image.network(state.model.data.topCourses.t, fit: BoxFit.fill,),
-                                 Text(
-                                  state.model.data!.topCourses.!,
-                                  style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w500),
-                                )
-                              ],
+                          return Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Container(
+                              height: 180,
+                              width: 164,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(11)),
+                              child: Column(
+                                children: [
+                                  Container(
+                                    width: 164,
+                                    height: 110,
+                                      decoration: BoxDecoration(
+                                          image: DecorationImage(
+                                            image: NetworkImage(
+                                              state.model.data!
+                                                  .topCourses![index].thumbnail
+                                                  .toString(),
+                                            ),
+                                            fit: BoxFit.cover,
+                                          ),
+                                          borderRadius:
+                                              BorderRadius.circular(11)),
+                                      ),
+                                      
+                                       Center(
+                                         child: Text(
+                                          state.model.data!.topCourses![index]
+                                              .title
+                                              .toString(),
+                                          style: TextStyle(
+                                              fontSize: 14,
+                                              fontWeight: FontWeight.w500),
+                                                                               ),
+                                       )
+                                ],
+                              ),
                             ),
                           );
                         }),
@@ -86,14 +123,16 @@ class HomeScreen extends StatelessWidget {
                   ],
                 ),
               );
+            } else {
+              return Center(
+                child: CupertinoActivityIndicator(),
+              );
             }
-            else{
-              return Center(child: CupertinoActivityIndicator(),);
-            }
-   } ),
+          }),
         ),
       ),
       bottomNavigationBar: BottomNavigationBarTrogon(),
     );
   }
 }
+//-------------------------------------
