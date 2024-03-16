@@ -3,27 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:trogon_media_test2/screens/homescreen/homescreen.dart';
 import 'package:trogon_media_test2/screens/mycourse/course.dart';
 
-class ProgramGrid extends StatelessWidget {
-  const ProgramGrid({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 180,
-      width: 164,
-      decoration: BoxDecoration(borderRadius: BorderRadius.circular(11)),
-      child: Column(
-        children: [
-          Image.asset("assets/hisham 8.png"),
-          const Text(
-            "Plus One Entrance Oriented Tuition",
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-          )
-        ],
-      ),
-    );
-  }
-}
 
 //-----------------------------------------------------------------------------
 class BottomNavigationBarTrogon extends StatelessWidget {
